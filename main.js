@@ -40,10 +40,10 @@ function game(){
     }
     results.map((round)=>{
         if (round.includes("Win")){
-            playerScore =+ 1;
+            playerScore++;
         
         } else if (round.includes("Lose")){
-            computerScore =+1;
+            computerScore++;
         }
     })
         console.log(results.join("\n"));
