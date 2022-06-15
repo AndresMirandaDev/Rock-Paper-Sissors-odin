@@ -28,11 +28,16 @@ function PlayRound(playerSelection, ComputerSelection){
         return "You Win! Scissors beats paper";
     }
 };
+
+
 const container =  document.querySelector("#container");
 const result = document.createElement("h1");
 const scoreBox= document.createElement("h2")
 
-result.setAttribute("style", "background: grey; border:solid 3px red; min-height: 5px" );
+
+result.setAttribute("style", "background: grey; border:solid 3px red; min-height: 50px" );
+result.textContent= "Select Rock Paper or Scissors!"
+
 
 const btn = document.querySelectorAll(".btn");
 btn.forEach((button)=>{
