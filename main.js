@@ -1,4 +1,6 @@
 let answers=["rock", "paper" ,"scissors"];
+let playerScore = 0;
+let computerScore = 0;
 
 function computerPlay(){
     let index=Math.floor(Math.random()*3);
@@ -25,39 +27,56 @@ function PlayRound(playerSelection, ComputerSelection){
     } else if (player === "scissors" && computer === "paper"){
         return "You Win! Scissors beats paper";
     }
-}
+};
+const container =  document.querySelector("#container");
+const result = document.createElement("h1");
+const scoreBox= document.createElement("h2")
 
-let playerSelection=prompt("introduce rock,paper or scissors");
+result.setAttribute("style", "background: grey; border:solid 3px red; min-height: 5px" );
 
-function game(){
-    let playerScore=0;
-    let computerScore=0;
-    let results=[];
-    
-    for(let i = 0; i < 5 ; i++){
-       results.push(PlayRound(playerSelection, computerPlay()))
+const btn = document.querySelectorAll(".btn");
+btn.forEach((button)=>{
+    button.addEventListener("click", (e)=>{
+        result.textContent = (PlayRound(e.target.innerText, computerPlay()));
+        CheckScore(result.textContent);
+        checkWinner(scoreBox.textContent);
         
-    }
-    results.map((round)=>{
-        if (round.includes("Win")){
-            playerScore++;
-        
-        } else if (round.includes("Lose")){
-            computerScore++;
-        }
     })
-        console.log(results.join("\n"));
-        console.log("PlayerScore: " + playerScore,"ComputerScore: " + computerScore); 
-   
-    if(playerScore === computerScore){
-            console.log("It's a Draw!");
-    }else if(playerScore > computerScore){
-            console.log("You won the game!");
-    }else{
-            console.log("You Lost the game!");
-    };
+});
+
+container.appendChild(result);
+
+
+
+function CheckScore(str){
+    if(str.includes("Win")){
+        playerScore++;
+    }else if(str.includes("Lose")){
+        computerScore++;
+    }
+   scoreBox.textContent = "Playerscore: " + " "+ playerScore +" " + "Computerscore :" +" " + computerScore
+   return scoreBox.textContent
+};
+
+function Reset () {
+    playerScore=0;
+    computerScore=0;
 }
-    
+
+function checkWinner (str) {
+    if(playerScore===5){
+        Reset();
+        return result.textContent = "Congratulations, You Won The Game!!"
+    }else if(computerScore===5){
+        Reset();
+        return result.textContent = "You Lost The Game, Try Again!"
+    }
+}
+
+container.appendChild(scoreBox)
 
 
-game();
+
+
+
+
